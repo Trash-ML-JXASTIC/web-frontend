@@ -1,0 +1,136 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Trash - 垃圾分类</title>
+  <meta name="description" content="垃圾分类 | 中国科技创新大赛 ｜ 机器学习">
+
+  <link type="text/css"  href="css/font.css" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/vendor/modernizr-3.8.0.min.js"></script>
+  <script src="js/vendor/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<header>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Trash  Classify</a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Trash - 垃圾分类</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">基于神经网络机器学习的人工智能垃圾图像分类系统</h5>
+      </div>
+      <div class="row center">
+        <div class="col s12 m2 offset-m4">
+          <form class="import-file-form" enctype="multipart/form-data">
+            <input type="file" name="imgFile" id="imgFile" style="display:none" onchange="uploadFile()">
+            <a id="upload" class="btn-large waves-effect waves-light orange" onclick="selectFile()"><i class="material-icons left">file_upload</i>上传识别</a>
+          </form>
+        </div>
+        <div class="hide-on-med-and-up">
+          <br /><br /><br />
+        </div>
+        <div class="col s12 m2">
+          <form class="import-file-form" enctype="multipart/form-data">
+            <input type="file" name="imgFile" id="imgFile2" style="display:none" onchange="uploadFile2()">
+            <a id="model-adjust" class="btn-large dropdown-trigger waves-effect waves-light teal" data-target='dropdown1'><i class="material-icons left">settings</i>模型修正</a>
+            <ul id='dropdown1' class='dropdown-content'>
+              <li><a onclick="selectFile2(0)">硬纸板</a></li>
+              <li><a onclick="selectFile2(1)">塑料</a></li>
+              <li><a onclick="selectFile2(2)">其他垃圾</a></li>
+            </ul>
+          </form>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col s6 offset-s3 m2 offset-m4">
+          <div id="progress1" class="progress orange lighten-4 hide">
+            <div class="indeterminate orange"></div>
+          </div>
+        </div>
+        <div class="col s6 m2 hide-on-small-only">
+          <div id="progress2_1" class="progress hide">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row center hide-on-med-and-up">
+        <div class="col s6 offset-s3 m2">
+          <div id="progress2_2" class="progress hide">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</header>
+
+
+<div class="container">
+  <div class="section">
+
+    <div id="result-card" class="row center scale-transition scale-out" hidden>
+      <div class="col s12 m6 offset-m3">
+        <div class="card">
+          <div class="card-image">
+            <img id="result-card-img" src="img/cardboard97.jpg" alt="">
+            <span id="result-card-classify" class="card-title">正在识别...</span>
+          </div>
+          <div class="card-content">
+            <p id="result-card-classify-content">图片已经提交到服务器进行处理了，请耐心等待。</p>
+          </div>
+          <div id="card-action" class="card-action hide" onclick="closeCard()">
+            <a href="#">确定</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">devices</i></h2>
+          <h5 class="center">多平台支持</h5>
+
+          <p class="light">我们使用 Web 的网页形式，使得我们可以在多种不同系统平台中的兼容应用，更可以将此打包应用到 微信 QQ 小程序中方便人们的日常生活。</p>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">done_all</i></h2>
+          <h5 class="center">单一图片的多种类垃圾识别</h5>
+
+          <p class="light">我们的算法可以将图片进行裁剪，以精准识别单一图片中的多种垃圾类型及其分类，便于在人们生产生活的日常使用。</p>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">layers</i></h2>
+          <h5 class="center">在线模型修正</h5>
+
+          <p class="light">我们支持您提交并人工标记垃圾的名称与种类，以提交的海量数据提升机器学习模型的准确性。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br><br>
+</div>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
