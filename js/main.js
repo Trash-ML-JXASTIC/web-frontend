@@ -1,5 +1,6 @@
 const REMOTE = "http://license.dreamcity.top:23524";
 $('.dropdown-trigger').dropdown();
+let train_option = -1;
 
 function selectFile(){
   let card = $('#result-card');
@@ -34,7 +35,7 @@ function uploadFile() {
       $('#progress1').addClass('hide');
       $('#card-action').removeClass('hide');
       classifyResult(ret['result'][0]);
-      //console.log(ret);
+      console.log(ret);
       M.toast({html: '上传成功!'})
     },
     error: function () {
@@ -50,11 +51,12 @@ function uploadFile() {
   });
 }
 
-function selectFile2(){
+function selectFile2(type){
+  train_option = type;
   $("#imgFile2").trigger("click");
 }
 
-function uploadFile2(type) {
+function uploadFile2() {
   let files = $('#imgFile2').prop('files');
   if (files[0] === undefined) {
     return
@@ -63,7 +65,7 @@ function uploadFile2(type) {
   $('#progress2_2').removeClass("hide");
   let data = new FormData();
   data.append('file', files[0]);
-  data.append('type', type);
+  data.append('type', train_option);
   $.ajax({
     type: 'POST',
     url: REMOTE + '/train',
