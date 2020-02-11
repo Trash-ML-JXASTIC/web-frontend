@@ -1,6 +1,6 @@
 const REMOTE = "http://license.dreamcity.top:23524";
 $('.dropdown-trigger').dropdown();
-let train_option = -1;
+ train_option = -1;
 
 function selectFile(){
   let card = $('#result-card');
@@ -34,8 +34,8 @@ function uploadFile() {
     success: function (ret) {
       $('#progress1').addClass('hide');
       $('#card-action').removeClass('hide');
-      classifyResult(ret['result'][0]);
-      console.log(ret);
+      classifyResult(ret);
+      //console.log(ret);
       M.toast({html: '上传成功!'})
     },
     error: function () {
@@ -101,21 +101,26 @@ function closeCard() {
   }, 500);
 }
 
-function classifyResult(type) {
+function classifyResult(ret) {
+  let type = ret['result'][0];
   switch(type) {
     case 0:
       $('#result-card-classify').text("硬纸板");
-      $('#result-card-classify-content').text("硬纸板是一种常见用于打包的可回收垃圾。");
+      $('#result-card-classify-content').text("硬纸板是一种常见用于打包的可回收垃圾。 " + classifyP(ret['probabilities'][0]));
       break;
     case 1:
       $('#result-card-classify').text("塑料");
-      $('#result-card-classify-content').text("塑料是一种常见的（半）透明可回收垃圾。");
+      $('#result-card-classify-content').text("塑料是一种常见的（半）透明可回收垃圾。" + classifyP(ret['probabilities'][0]));
       break;
     case 2:
       $('#result-card-classify').text("其他垃圾");
-      $('#result-card-classify-content').text("这是生活中的一些常见垃圾，这些垃圾大部分可以进行回收。");
+      $('#result-card-classify-content').text("这是生活中的一些常见垃圾，这些垃圾大部分可以进行回收。" + classifyP(ret['probabilities'][0]));
       break;
   }
+}
+
+function classifyP(P) {
+  return "硬纸板: " + P[0] + "；塑料: " + P[1] + "；其他垃圾: " + P[2]
 }
 
 function getObjectURL(file) {
