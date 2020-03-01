@@ -1,4 +1,4 @@
-const REMOTE = "http://license.dreamcity.top:23524";
+const REMOTE = "http://liujiahuanmsl.dreamcity.top:23524";
 $('.dropdown-trigger').dropdown();
  train_option = -1;
 
