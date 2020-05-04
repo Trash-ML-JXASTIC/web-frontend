@@ -1,4 +1,4 @@
-const REMOTE = "http://liujiahuanmsl.dreamcity.top:23524";
+const REMOTE = "http://" + window.location.hostname + ":8080";
 $('.dropdown-trigger').dropdown();
  train_option = -1;
 
@@ -106,21 +106,21 @@ function classifyResult(ret) {
   switch(type) {
     case 0:
       $('#result-card-classify').text("硬纸板");
-      $('#result-card-classify-content').text("硬纸板是一种常见用于打包的可回收垃圾。 " + classifyP(ret['probabilities'][0]));
+      $('#result-card-classify-content').html("<b>硬纸板是一种常见用于打包的可回收垃圾。 </b><br>" + classifyP(ret['probabilities'][0]));
       break;
     case 1:
       $('#result-card-classify').text("塑料");
-      $('#result-card-classify-content').text("塑料是一种常见的（半）透明可回收垃圾。" + classifyP(ret['probabilities'][0]));
+      $('#result-card-classify-content').html("<b>塑料是一种常见的（半）透明可回收垃圾。</b><br>" + classifyP(ret['probabilities'][0]));
       break;
     case 2:
       $('#result-card-classify').text("其他垃圾");
-      $('#result-card-classify-content').text("这是生活中的一些常见垃圾，这些垃圾大部分可以进行回收。" + classifyP(ret['probabilities'][0]));
+      $('#result-card-classify-content').html("<b>这是生活中的一些常见垃圾，这些垃圾大部分可以进行回收。</b><br>" + classifyP(ret['probabilities'][0]));
       break;
   }
 }
 
 function classifyP(P) {
-  return "硬纸板: " + P[0] + "；塑料: " + P[1] + "；其他垃圾: " + P[2]
+  return "硬纸板: " + P[0] + "<br>塑料: " + P[1] + "<br>其他垃圾: " + P[2]
 }
 
 function getObjectURL(file) {
